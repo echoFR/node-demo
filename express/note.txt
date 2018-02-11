@@ -1,0 +1,35 @@
+express 框架    依赖中间件
+1. 安装
+2. 配置
+3. 接受请求
+4. 响应
+
+express 保留了原生的功能  添加了一些方法
+req/res 里面添加了一些功能
+
+res.send({}) 参数可以是json
+res.write() 参数只能是字符串或者buffer ，其他会崩
+
+express的3种接受用户请求的方法：
+地址 ，函数（req，res）   //非破坏性的  
+.get('/',(res,req)=>{});  
+.post('/',(res,req)=>{});
+.use('/',(res,req)=>{});    .use(()=>{}); 只有一个函数   针对所有的路径
+
+中间件 ---自己制作 链式作用:监听同一个请求的地址  参数(req,res,next)  需要继续next();   req.a=12 会在next的下一个请求上保留不变
+
+//npm search  express-static
+//npm install  express-static 处理静态文件
+
+中间件的用法：
+下载 npm install XXX
+引入 require
+server.use(express-static(访问的目录)); 
+
+
+cookie 在浏览器保存一些数据  每次请求都会带过来
+        不安全、有限（4K）
+session  保存数据 保存在服务端
+        安全、基于cookie实现的
+cookie中会有一个session的ID，服务器利用sessionid找到session文件、读取、写入
+session_id--> session劫持
